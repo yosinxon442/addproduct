@@ -1,0 +1,15 @@
+.wishlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .wishlist {
+    padding: 16px;
+  }
+  
+  .wishlist p {
+    text-align: center;
+  }

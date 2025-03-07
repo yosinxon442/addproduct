@@ -1,0 +1,72 @@
+.add-product {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.add-product h2 {
+  text-align: center;
+}
+
+.add-product form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-product input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-product .image-search {
+  display: flex;
+  gap: 10px;
+}
+
+.add-product .image-search button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.add-product .image-search button:hover {
+  background-color: #0056b3;
+}
+
+.add-product .search-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.add-product .search-results img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-product .search-results img.selected {
+  border-color: #007bff;
+}
+
+.add-product button[type="submit"] {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+.add-product button[type="submit"]:hover {
+  background-color: #218838;
+}
