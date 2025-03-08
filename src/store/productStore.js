@@ -19,9 +19,19 @@ const useProductStore = create(
             p.id === id ? { ...p, inCart: !p.inCart } : p
           ),
         })),
+      deleteProduct: (id) =>
+        set((state) => ({
+          products: state.products.filter((p) => p.id !== id),
+        })),
+      updateProduct: (id, updatedProduct) =>
+        set((state) => ({
+          products: state.products.map((p) =>
+            p.id === id ? { ...p, ...updatedProduct } : p
+          ),
+        })),
     }),
     {
-      name: 'product-storage', // LocalStorage ga saqlash uchun key
+      name: 'product-storage',
     }
   )
 );

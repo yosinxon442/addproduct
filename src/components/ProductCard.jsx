@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import useProductStore from '../store/productStore';
+import useAuthStore from '../store/authStore';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
-  const { toggleLike, toggleCart } = useProductStore();
+  const { toggleLike, toggleCart, deleteProduct } = useProductStore();
+  const { user } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLike = (id) => {
@@ -12,6 +14,14 @@ const ProductCard = ({ product }) => {
 
   const handleCart = (id) => {
     toggleCart(id);
+  };
+
+  const handleDelete = (id) => {
+    deleteProduct(id);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/edit-product/${id}`);
   };
 
   const renderRating = (rating) => {
@@ -24,12 +34,21 @@ const ProductCard = ({ product }) => {
       <p>Price: ${product.price}</p>
       <p>Rating: {renderRating(product.rating)}</p>
       <p>{product.description}</p>
-      <button onClick={() => handleLike(product.id)}>
-        {product.liked ? 'Unlike' : 'Like'}
-      </button>
-      <button onClick={() => handleCart(product.id)}>
-        {product.inCart ? 'Remove from Cart' : 'Add to Cart'}
-      </button>
+      {user ? (
+        <>
+          <button onClick={() => handleDelete(product.id)}>Delete</button>
+          <button onClick={() => handleEdit(product.id)}>Edit</button>
+        </>
+      ) : (
+        <>
+          <button onClick={() => handleLike(product.id)}>
+            {product.liked ? 'Unlike' : 'Like'}
+          </button>
+          <button onClick={() => handleCart(product.id)}>
+            {product.inCart ? 'Remove from Cart' : 'Add to Cart'}
+          </button>
+        </>
+      )}
     </div>
   );
 };
