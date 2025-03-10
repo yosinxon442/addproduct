@@ -13,30 +13,27 @@ const Register = () => {
   const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
-  // Email formatini tekshirish
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
 
-  // API orqali emailni tekshirish
   const verifyEmail = async (email) => {
     try {
       const response = await axios.get(
         `https://emailvalidation.abstractapi.com/v1/?api_key=${API_KEY}&email=${email}`
       );
 
-      console.log("Email verification response:", response.data); // Debug uchun
+      console.log("Email verification response:", response.data);
 
-      // API dan kelgan natija tekshiriladi
       return (
         response.data.is_valid_format.value &&
         response.data.deliverability === "DELIVERABLE"
       );
     } catch (error) {
       console.error("Email verification error:", error);
-      setError('Emailni tekshirishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.');
-      alert('Emailni tekshirishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.');
+      setError('Emailni tekshirishda xatolik yuz berdi. Iltimos, qayta urinib koring.');
+      alert('Emailni tekshirishda xatolik yuz berdi. Iltimos, qayta urinib koring.');
       return false;
     }
   };
@@ -45,7 +42,6 @@ const Register = () => {
     e.preventDefault();
     setError('');
 
-    // Email formatini tekshirish
     if (!validateEmail(email)) {
       const errorMessage = 'Iltimos, to‘g‘ri email manzilini kiriting.';
       setError(errorMessage);
@@ -53,18 +49,16 @@ const Register = () => {
       return;
     }
 
-    // API orqali emailni tekshirish
     const isEmailValid = await verifyEmail(email);
     if (!isEmailValid) {
-      const errorMessage = 'Bu email manzili noto‘g‘ri yoki ishlatilmaydi.';
+      const errorMessage = 'Bu email manzili notogri yoki ishlatilmaydi.';
       setError(errorMessage);
       alert(errorMessage);
       return;
     }
 
-    // Email valid bo'lsa, ro'yxatdan o'tkazish
     login({ email });
-    alert('Ro‘yxatdan muvaffaqiyatli o‘tdingiz!');
+    alert('Royxatdan muvaffaqiyatli otdingiz!');
     navigate('/');
   };
 
