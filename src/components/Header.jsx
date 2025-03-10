@@ -19,6 +19,7 @@ const Header = () => {
             <Link to="/wishlist">Wishlist ({likedProductsCount})</Link>
             <Link to="/cart">Cart ({cartProductsCount})</Link>
             <Link to="/add-product">Add Product</Link>
+            <Link to="/profile">Profile</Link>
             <button className="logout" onClick={logout}>Logout</button>
           </>
         ) : (
